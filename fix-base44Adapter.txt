@@ -1,0 +1,10 @@
+FIX #1: base44Adapter.ts line 47
+
+FIND this line:
+function applyMatch<T>(builder: any, q?: Record<string, any>) {
+
+REPLACE with (remove the unused <T>):
+function applyMatch(builder: any, q?: Record<string, any>) {
+
+OR if T is used later in the function, add _ prefix to show it's intentionally unused:
+function applyMatch<_T>(builder: any, q?: Record<string, any>) {

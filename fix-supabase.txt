@@ -1,0 +1,18 @@
+FIX #3: supabase.ts line 16
+
+PROBLEM: Import of '../types/database' doesn't exist yet
+
+FIND this line:
+import type { Database } from '../types/database'; // We'll create this later
+
+REPLACE with (comment it out for now):
+// import type { Database } from '../types/database'; // TODO: Generate from Supabase
+
+Then FIND where Database type is used (probably in createClient call):
+export const supabase = createClient<Database>(...)
+
+REPLACE with:
+export const supabase = createClient(...)
+
+OR create a simple placeholder type at the top of the file:
+type Database = any; // Placeholder until we generate types from Supabase
