@@ -85,10 +85,17 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
  * await supabase.auth.signOut();
  * 
  * // Query database
- * const { data, error } = await supabase
- *   .from('profiles')
- *   .select('*')
- *   .eq('id', user.id)
+const { data, error } = await supabase
+  .from('jobs')
+  .insert({
+    title: 'Product Designer',
+    company: 'Relevnt Labs',
+    location: 'Remote',
+    description: 'Design sleek, AI-powered job interfaces.'
+  })
+  .select()
+
+    .order('created_at', { ascending: false });
  *   .single();
  * ```
  */
