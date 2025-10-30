@@ -17,13 +17,13 @@ import { useAuth } from '../context/AuthContext';
 export function SignUp() {
   const navigate = useNavigate();
   const { signUp } = useAuth();
-  
+
   // 🎓 Form State
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   // 🎓 UI State
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,19 +38,19 @@ export function SignUp() {
     if (!fullName.trim()) {
       return 'Please enter your name';
     }
-    
+
     if (!email.trim()) {
       return 'Please enter your email';
     }
-    
+
     if (password.length < 6) {
       return 'Password must be at least 6 characters';
     }
-    
+
     if (password !== confirmPassword) {
       return 'Passwords do not match';
     }
-    
+
     return null; // No errors
   };
 
@@ -59,22 +59,22 @@ export function SignUp() {
    */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate before submitting
     const validationError = validateForm();
     if (validationError) {
       setError(validationError);
       return;
     }
-    
+
     setLoading(true);
     setError(null);
-    
+
     // 🎓 Send metadata to be stored in user profile
     const { error } = await signUp(email, password, {
       full_name: fullName,
     });
-    
+
     if (error) {
       setError(error.message);
       setLoading(false);
@@ -213,7 +213,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: '#f5f5f5',
     padding: '20px',
   },
-  
+
   card: {
     width: '100%',
     maxWidth: '400px',
@@ -222,24 +222,24 @@ const styles: { [key: string]: React.CSSProperties } = {
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
     padding: '40px',
   },
-  
+
   header: {
     textAlign: 'center',
     marginBottom: '32px',
   },
-  
+
   title: {
     fontSize: '28px',
     fontWeight: 'bold',
     color: '#333',
     marginBottom: '8px',
   },
-  
+
   subtitle: {
     fontSize: '16px',
     color: '#666',
   },
-  
+
   error: {
     backgroundColor: '#fee',
     color: '#c33',
@@ -248,25 +248,25 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginBottom: '20px',
     fontSize: '14px',
   },
-  
+
   form: {
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
   },
-  
+
   inputGroup: {
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
   },
-  
+
   label: {
     fontSize: '14px',
     fontWeight: '500',
     color: '#333',
   },
-  
+
   input: {
     padding: '12px',
     fontSize: '16px',
@@ -275,19 +275,19 @@ const styles: { [key: string]: React.CSSProperties } = {
     outline: 'none',
     transition: 'border-color 0.2s',
   },
-  
+
   hint: {
     fontSize: '12px',
     color: '#999',
   },
-  
+
   link: {
     color: '#4E808D',
     textDecoration: 'none',
     fontSize: '14px',
     fontWeight: '500',
   },
-  
+
   button: {
     padding: '12px',
     fontSize: '16px',
@@ -299,17 +299,17 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: 'pointer',
     transition: 'background-color 0.2s',
   },
-  
+
   buttonDisabled: {
     backgroundColor: '#ccc',
     cursor: 'not-allowed',
   },
-  
+
   footer: {
     marginTop: '24px',
     textAlign: 'center',
   },
-  
+
   footerText: {
     fontSize: '14px',
     color: '#666',
